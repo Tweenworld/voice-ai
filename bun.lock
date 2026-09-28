@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "voice-ai",
+      "name": "sorele",
       "dependencies": {
         "@clerk/nextjs": "^7.9.5",
         "@prisma/orm-postgres": "^8.0.0-rc.11",
