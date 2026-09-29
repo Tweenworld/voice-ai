@@ -126,7 +126,7 @@ export function DashboardSidebar() {
         },
         {
             title: "Help and support",
-            url: "tweenhaven35@gmail.com",
+            url: "mailto:tweenhaven35@gmail.com",
             icon: Headphones,
         },
     ];
