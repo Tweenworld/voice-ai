@@ -36,6 +36,7 @@ export const WavyBackground = ({
   ...props
 }: WavyBackgroundProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const colorsKey = JSON.stringify(colors ?? DEFAULT_WAVE_COLORS);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,7 +44,7 @@ export const WavyBackground = ({
     if (!canvas || !context) return;
 
     const noise = createNoise3D();
-    const waveColors = colors ?? DEFAULT_WAVE_COLORS;
+    const waveColors: string[] = JSON.parse(colorsKey);
     const speedFactor = speed === "slow" ? 0.001 : 0.002;
     let width = 0;
     let height = 0;
@@ -84,7 +85,7 @@ export const WavyBackground = ({
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [backgroundFill, colors, speed, waveOpacity, waveWidth, waveYOffset]);
+  }, [backgroundFill, colorsKey, speed, waveOpacity, waveWidth, waveYOffset]);
 
   return (
     <div

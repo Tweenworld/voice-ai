@@ -28,7 +28,6 @@ export function SettingsPanel() {
                     className="mt-0 flex min-h-0 flex-1 flex-col overflow-y-auto"
                 >
                     <SettingsPanelSettings />
-                    <p>Settings panel!</p>
                 </TabsContent>
                 <TabsContent
                     value="history"

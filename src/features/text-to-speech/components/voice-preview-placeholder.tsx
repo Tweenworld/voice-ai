@@ -22,7 +22,7 @@ export function VoicePreviewPlaceholder() {
                     </div>
                 </div>
                 <p className="text-lg font-semibold tracking-tight text-muted-foreground">
-                    Once you generate, your audio result will apear here. Sit back and relax.
+                    Once you generate, your audio result will appear here. Sit back and relax.
                 </p>
             </div>
             <Button variant="outline" size="sm" asChild>

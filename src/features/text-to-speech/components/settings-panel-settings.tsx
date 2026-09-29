@@ -19,7 +19,7 @@ export function SettingsPanelSettings() {
             {/* Voice style dropdown section */}
             <div className="border-b border-dashed p-4">
                 <p className="text-sm text-muted-foreground">
-                    Vice selector coming soon
+                    Voice selector coming soon
                 </p>
             </div>
 
@@ -40,6 +40,7 @@ export function SettingsPanelSettings() {
                                         </span>
                                     </div>
                                     <Slider
+                                        aria-label={slider.label}
                                         value={[field.state.value]}
                                         onValueChange={(value) => field.handleChange(value[0])}
                                         min={slider.min}

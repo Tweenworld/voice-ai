@@ -24,6 +24,7 @@ export function TextInputPanel() {
                 <form.Field name="text">
                     {(field) => (
                         <Textarea
+                            aria-label="Text to convert to speech"
                             value={field.state.value}
                             onChange={(e) => field.handleChange(e.target.value)}
                             placeholder="Start typing or paste your text here..."
@@ -44,7 +45,7 @@ export function TextInputPanel() {
                 <div className="flex flex-col gap-3 lg:hidden">
                     <GenerateButton
                         className="w-full"
-                        disabled={isSubmitting}
+                        disabled={isSubmitting || !isValid}
                         isSubmitting={isSubmitting}
                         onSubmit={() => form.handleSubmit()}
                     />
