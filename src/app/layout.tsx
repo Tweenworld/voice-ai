@@ -15,7 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sorele",
+  title: {
+    default: "Sorele",
+    template: "%s | Sorele"
+  },
   description: "Voice Reimagined",
 };
 
