@@ -31,10 +31,6 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
-!.env.example
-
-# local agent instructions
 /.agents/
 /.claude/
 /.cursor/
@@ -49,3 +45,6 @@ next-env.d.ts
 node_modules/
 dist/
 .env
+
+
+/scripts/system-voices
