@@ -140,9 +140,9 @@ export function DashboardSidebar() {
                     <Image
                         src="/logo.png"
                         alt="Sorele"
-                        width={32}
-                        height={32}
-                        className="size-8 shrink-0 rounded-sm object-contain"
+                        width={24}
+                        height={24}
+                        className="rounded-sm"
                     />
                     <span className="group-data-[collapsible=icon]:hidden font-semibold text-lg tracking-tighter text-foreground">
                         Sorele
