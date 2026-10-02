@@ -5,7 +5,6 @@ import { createTRPCRouter, orgProcedure } from "../init";
 import { TRPCError } from "@trpc/server";
 import { deleteAudio } from "@/lib/r2";
 
-
 export const voicesRouter = createTRPCRouter({
     getAll: orgProcedure
         .input(
@@ -59,38 +58,49 @@ export const voicesRouter = createTRPCRouter({
             return { custom, system };
         }),
 
-        delete: orgProcedure
-            .input(z.object({ id: z.string() }))
-            .mutation(async ({ ctx, input }) => {
-                const voice = await prisma.orm.public.Voice
-                    .where({
-                        id: input.id,
-                        variant: "CUSTOM",
-                        orgId: ctx.orgId,
-                    })
-                    .select("id", "r2ObjectKey")
-                    .first();
+    delete: orgProcedure
+        .input(z.object({ id: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            // 1. Fetch the voice record first to secure the storage object key
+            const voice = await prisma.orm.public.Voice
+                .where({
+                    id: input.id,
+                    variant: "CUSTOM",
+                    orgId: ctx.orgId,
+                })
+                .select("id", "r2ObjectKey")
+                .first();
 
-                if (!voice) {
+            if (!voice) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Voice not found",
+                });
+            }
+
+            // 2. Attempt file deletion from Cloudflare R2 BEFORE altering the database.
+            //    If this fails, it throws an error, keeps the DB row intact, and allows a retry.
+            if (voice.r2ObjectKey) {
+                try {
+                    await deleteAudio(voice.r2ObjectKey);
+                } catch (error) {
                     throw new TRPCError({
-                        code: "NOT_FOUND",
-                        message: "Voice not found",
+                        code: "INTERNAL_SERVER_ERROR",
+                        message: "Failed to delete associated audio files from storage. Please try again.",
+                        cause: error,
                     });
                 }
+            }
 
-                await prisma.orm.public.Voice
-                    .where({
-                        id: voice.id,
-                        variant: "CUSTOM",
-                        orgId: ctx.orgId,
-                    })
-                    .delete();
+            // 3. Only delete the database row once the storage block has cleared successfully
+            await prisma.orm.public.Voice
+                .where({
+                    id: voice.id,
+                    variant: "CUSTOM",
+                    orgId: ctx.orgId,
+                })
+                .delete();
 
-                if (voice.r2ObjectKey) {
-                    // In production consider background jobs, retries, cron jobs etc
-                    await deleteAudio(voice.r2ObjectKey).catch(() => {});
-                }
-
-                return { success: true };
-            }),
+            return { success: true };
+        }),
 });

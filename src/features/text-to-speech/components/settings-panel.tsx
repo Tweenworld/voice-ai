@@ -19,7 +19,7 @@ export function SettingsPanel() {
                         Settings
                     </TabsTrigger>
                     <TabsTrigger value="history" className={tabTriggerClassName}>
-                        <Settings className="size-4" />
+                        <History className="size-4" />
                         History
                     </TabsTrigger>
                 </TabsList>

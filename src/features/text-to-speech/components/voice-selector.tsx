@@ -33,13 +33,13 @@ export function VoiceSelector() {
 
         return (
             <Field>
-                <FieldLabel>Voice style</FieldLabel>
+                <FieldLabel htmlFor="voice-style-select">Voice style</FieldLabel>
                 <Select
                     value={voiceId}
                     onValueChange={(v) => form.setFieldValue("voiceId", v)}
                     disabled={isSubmitting}
                 >
-                    <SelectTrigger className="w-full h-auto gap-1 rounded-lg bg-white px-2 py-1">
+                    <SelectTrigger id="voice-style-select" className="w-full h-auto gap-1 rounded-lg bg-white px-2 py-1">
                         <SelectValue>
                             {currentVoice && (
                                 <>
