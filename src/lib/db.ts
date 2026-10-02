@@ -1,1 +1,1 @@
-export { db as prisma } from '@/prisma/db';
+export { db as prisma } from "@/prisma/db";

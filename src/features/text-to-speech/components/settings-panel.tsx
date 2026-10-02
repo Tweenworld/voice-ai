@@ -1,4 +1,4 @@
-import { History, Settings } from "lucide-react";
+import {History, Settings } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SettingsPanelHistory } from "./settings-panel-history";
 import { SettingsPanelSettings } from "./settings-panel-settings";
@@ -19,7 +19,7 @@ export function SettingsPanel() {
                         Settings
                     </TabsTrigger>
                     <TabsTrigger value="history" className={tabTriggerClassName}>
-                        <History className="size-4" />
+                        <Settings className="size-4" />
                         History
                     </TabsTrigger>
                 </TabsList>

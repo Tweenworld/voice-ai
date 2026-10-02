@@ -8,6 +8,7 @@ import { useTypedAppFormContext } from "@/hooks/use-app-form";
 
 import { sliders } from "@/features/text-to-speech/data/sliders";
 import { ttsFormOptions } from "./text-to-speech-form";
+import { VoiceSelector } from "./voice-selector";
 
 
 export function SettingsPanelSettings() {
@@ -18,9 +19,7 @@ export function SettingsPanelSettings() {
         <>
             {/* Voice style dropdown section */}
             <div className="border-b border-dashed p-4">
-                <p className="text-sm text-muted-foreground">
-                    Voice selector coming soon
-                </p>
+                <VoiceSelector />
             </div>
 
             {/* Voice adjustments section */}
@@ -30,7 +29,8 @@ export function SettingsPanelSettings() {
                         <form.Field key={slider.id} name={slider.id}>
                             {(field) => (
                                 <Field>
-                                    <FieldLabel>{slider.label}</FieldLabel>
+                                    {/*  Linked the visible label to the slider via htmlFor */}
+                                    <FieldLabel htmlFor={slider.id}>{slider.label}</FieldLabel>
                                     <div className="flex items-center justify-between">
                                         <span className="text-xs text-muted-foreground">
                                             {slider.leftLabel}
@@ -40,7 +40,8 @@ export function SettingsPanelSettings() {
                                         </span>
                                     </div>
                                     <Slider
-                                        aria-label={slider.label}
+                                        id={slider.id} 
+                                        aria-label={slider.label} 
                                         value={[field.state.value]}
                                         onValueChange={(value) => field.handleChange(value[0])}
                                         min={slider.min}

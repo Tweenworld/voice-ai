@@ -18,7 +18,7 @@ export function GenerateButton({
 }) {
     return (
         <Button
-            type="button"
+            type="button" 
             size={size}
             className={className}
             onClick={onSubmit}
@@ -30,7 +30,7 @@ export function GenerateButton({
                     Generating...
                 </>
             ): (
-                "Generate speech"
+                "Generate speech" 
             )}
         </Button>
     );
